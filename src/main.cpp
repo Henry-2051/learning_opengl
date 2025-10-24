@@ -8,11 +8,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "load_file_to_string.h"
-#include "checkOpenglCompileErrors.h"
+#include "my_OpenGL_utills.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include <stb/stb_image.h>
 
 int width = 1500;
 int height = 1100;
@@ -202,7 +201,7 @@ int main(int argc, char const *argv[])
     stbi_set_flip_vertically_on_load(true);  
 
 
-    unsigned char *data = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load("../src/container.jpg", &width, &height, &nrChannels, 0);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -217,7 +216,7 @@ int main(int argc, char const *argv[])
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture2);
 
-    unsigned char *data2 = stbi_load("awesomeface.png", &width, &height, &nrChannels, 0);
+    unsigned char *data2 = stbi_load("../src/awesomeface.png", &width, &height, &nrChannels, 0);
     if (data2)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data2);
@@ -261,9 +260,8 @@ int main(int argc, char const *argv[])
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
         
+        // glm::vec3 came
         
-
-
         glm::mat4 model = glm::mat4(1.0f);
         // model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));  
 

@@ -1,10 +1,38 @@
+#include <GL/glew.h>
+#include <string>
+#include <optional>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
+#ifndef SHADER_H
+#define SHADER_H
+std::string loadFileToString(const char* filepath) {
+    std::string file_text;
+    std::ifstream file;
+
+    file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+    try
+    {
+        file.open(filepath);
+        std::stringstream file_string_stream;
+
+        file_string_stream << file.rdbuf();
+
+        file.close();
+
+        file_text = file_string_stream.str();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Failed to open: " << filepath << "\n" << e.what() << '\n';
+    }
+    return file_text;
+}
+#endif
+
 #ifndef OPENGL_COMP_CHECKER27
 #define OPENGL_COMP_CHECKER27
-
-#include <GL/glew.h>
-#include <iostream>
-#include <optional>
-
 namespace ShaderUtils {
     inline std::optional<std::string> getCompileErrors(unsigned int shader, std::string type)
     {
@@ -32,5 +60,4 @@ namespace ShaderUtils {
         return std::nullopt;
     }
 }
-
 #endif

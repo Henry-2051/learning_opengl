@@ -28,6 +28,7 @@
               glew
               mesa
               glm
+              stb
 
               libGL
             ];
@@ -44,6 +45,7 @@
               glew
               mesa
               glm
+              stb
               
               libGL
             ];
